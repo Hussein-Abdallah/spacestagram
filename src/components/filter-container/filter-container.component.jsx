@@ -14,7 +14,7 @@ const FilterContainer = ({dateFilterValue, setDateFilter}) => {
         <div className="container my-3">
             <div className="row align-items-center">
                 <div className="col-auto">
-                    Browse Photo by
+                    Browse Photos by starting date
                 </div>
                 <div className="col-auto">
                     <DatePicker 
