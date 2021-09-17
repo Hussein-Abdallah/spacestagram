@@ -5,6 +5,7 @@ import Header from './components/header/header.component';
 import ImagesList from './components/images-list/images-list.component';
 import {nanoid} from 'nanoid';
 import LoadingSpinner from './components/loading-spinner/loading-spinner.component';
+import Modal from './components/modal/modal.component';
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends Component {
     this.state = {
       dateFilterValue: '',
       imagesList: [],
-      loading: true
+      loading: false
     }
   }
 
@@ -50,6 +51,7 @@ class App extends Component {
       <Header/>
       <FilterContainer dateFilterValue={dateFilterValue} setDateFilter={this.setDateFilter} />
       {loading ? <LoadingSpinner /> : <ImagesList imagesList={imagesList} />}
+      <Modal />
     </div>
   );
   }
