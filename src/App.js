@@ -49,7 +49,7 @@ class App extends Component {
     if(date && date !== null) {
        url = `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
     } else {
-       url = `https://api.nasa.gov/planetary/apod?count=15&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
+       url = `https://api.nasa.gov/planetary/apod?count=8&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
     }
     const resp = await fetch(url)
     const images = await resp.json()

@@ -1,4 +1,5 @@
 import React from 'react';
+import Heart from '../heart/heart.component';
 import './image-card.styles.css';
 
 const ImageCard = ({id, hdurl, title, date, explanation, url}) => {
@@ -36,7 +37,7 @@ const ImageCard = ({id, hdurl, title, date, explanation, url}) => {
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{date}</p>
                     <p className="card-text">{(explanation.length > 150) ? explanation.substring(0, 150) + '...' : explanation}</p>
-                    <a href={url} className="btn btn-primary">More information</a>
+                    <Heart floatDirection="right"/>
                 </div>
             </div>
         </div>
