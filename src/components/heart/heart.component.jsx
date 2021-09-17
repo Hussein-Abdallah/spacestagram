@@ -9,7 +9,7 @@ const Heart = ({floatDirection}) => {
 
     return(
         <div className="stage">
-            <div className="heart" style={{background: `url("/assets/resized-heart.png")`, float: `${floatDirection}`}} onClick={handleHeartClick}></div>
+            <button className="heart" style={{background: `url("/assets/resized-heart.png")`, float: `${floatDirection}`}} onClick={handleHeartClick}></button>
         </div>
     )
 }
