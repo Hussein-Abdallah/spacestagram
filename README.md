@@ -11,6 +11,8 @@ My goal was to provide a good solution with the knowledge I have
 * Responsive CSS using Bootstrap CSS Framework.
 * The application fetches data from the Nasa's API .
 
+
+
 # Why I built the project this way
 
 * I didn't use a state management library like Redux on purpose. For this app, simple `State` is sufficient. 

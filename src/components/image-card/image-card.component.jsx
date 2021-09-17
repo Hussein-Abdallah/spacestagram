@@ -29,7 +29,7 @@ const ImageCard = ({id, hdurl, title, date, explanation, url}) => {
                 <div
                 className="card-img" 
                 style={{
-                    backgroundImage: `url(/assets/placeholder.jpeg)`
+                    backgroundImage: `url(assets/placeholder.jpeg)`
                 }}></div>
             }
                 
