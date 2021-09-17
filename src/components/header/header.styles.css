@@ -1,0 +1,7 @@
+.site-header__logo-link {
+    text-decoration: none;
+}
+
+.site-header__logo-link:hover {
+    color: #606060;
+}

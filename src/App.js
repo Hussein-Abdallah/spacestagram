@@ -1,25 +1,58 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import FilterContainer from './components/filter-container/filter-container.component';
+import Header from './components/header/header.component';
+import ImagesList from './components/images-list/images-list.component';
+import {nanoid} from 'nanoid';
+import LoadingSpinner from './components/loading-spinner/loading-spinner.component';
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dateFilterValue: '',
+      imagesList: [],
+      loading: true
+    }
+  }
+
+
+  setDateFilter = (date) => {
+    this.setState({
+      dateFilterValue: date
+    });
+  }
+  componentDidMount() {
+    this.setState({loading: true})
+    this.initiateImagesList()
+}
+
+  initiateImagesList = async () => {
+    const resp = await fetch(`https://api.nasa.gov/planetary/apod?count=20&api_key=${process.env.REACT_APP_NASA_API_KEY}`)
+    const images = await resp.json()
+        const updatedImagesList = images.map(image =>  ({ 
+          id: `${nanoid()}`, 
+          favorite: false, 
+          ...image
+        }));
+        console.log(updatedImagesList)
+        this.setState({
+        imagesList: updatedImagesList,
+        loading: false
+      })
+  }
+
+
+  render() {
+  const {dateFilterValue, imagesList, loading} = this.state;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <FilterContainer dateFilterValue={dateFilterValue} setDateFilter={this.setDateFilter} />
+      {loading ? <LoadingSpinner /> : <ImagesList imagesList={imagesList} />}
     </div>
   );
+  }
 }
 
 export default App;
