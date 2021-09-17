@@ -16,8 +16,12 @@
   .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    /*width: 80%;
+    max-width: 700px;*/
+    height: auto;
+    max-height: 90%;
+    width: auto;
+    max-width: 100%;
   }
   
   /* Caption of Modal Image */
@@ -33,7 +37,7 @@
   }
   
   /* Add Animation */
-  .modal-content, #caption {  
+  .modal-content, #Caption {  
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;

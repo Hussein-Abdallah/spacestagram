@@ -17,26 +17,58 @@ class App extends Component {
     }
   }
 
-
   setDateFilter = (date) => {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    if(new Date(date) >= today) {
+      alert("Date selected should be before today's date");
+      return;
+      }
+    let newDateFormat;
+    if(date) {
+      newDateFormat = new Date(date).toISOString().slice(0, 10);
+    } else {
+      newDateFormat = ''
+    }
     this.setState({
       dateFilterValue: date
+    },() => {
+      console.log(this.state)
+      this.initiateImagesList(newDateFormat)
     });
   }
   componentDidMount() {
-    this.setState({loading: true})
     this.initiateImagesList()
 }
 
-  initiateImagesList = async () => {
-    const resp = await fetch(`https://api.nasa.gov/planetary/apod?count=20&api_key=${process.env.REACT_APP_NASA_API_KEY}`)
+  initiateImagesList = async (date = null) => {
+    this.setState({
+      loading: true
+    })
+    let url = '';
+    if(date && date !== null) {
+       url = `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
+    } else {
+       url = `https://api.nasa.gov/planetary/apod?count=15&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
+    }
+    const resp = await fetch(url)
     const images = await resp.json()
-        const updatedImagesList = images.map(image =>  ({ 
-          id: `${nanoid()}`, 
-          favorite: false, 
-          ...image
-        }));
-        console.log(updatedImagesList)
+    console.log(images)
+    let updatedImagesList;
+    if(date) {
+      updatedImagesList = [{
+        id: `${nanoid()}`, 
+        favorite: false, 
+        ...images
+      }]
+    } else {
+      updatedImagesList = images.map(image =>  ({ 
+        id: `${nanoid()}`, 
+        favorite: false, 
+        ...image
+      }));
+    }
+        
         this.setState({
         imagesList: updatedImagesList,
         loading: false
